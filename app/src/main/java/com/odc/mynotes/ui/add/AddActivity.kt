@@ -6,9 +6,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.odc.mynotes.R
+import com.odc.mynotes.data.db.NoteDB
 import com.odc.mynotes.data.entity.Note
-import com.odc.mynotes.utils.data
+import io.reactivex.CompletableObserver
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add.*
 import java.io.IOException
 import java.util.*
@@ -35,9 +40,26 @@ class AddActivity : AppCompatActivity() {
 				image = filePath.toString(),
 				createAt = Date().time
 			)
-			data.add(note)
-			setResult(Activity.RESULT_OK)
-			finish()
+			NoteDB.getDatabase(this).getDao()
+				.insert(note)
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribe(object : CompletableObserver {
+					override fun onComplete() {
+						finish()
+					}
+
+					override fun onSubscribe(d: Disposable) {
+
+					}
+
+					override fun onError(e: Throwable) {
+						Snackbar.make(it, "ERROR", Snackbar.LENGTH_LONG).show()
+					}
+
+				})
+
+
 		}
 	}
 
