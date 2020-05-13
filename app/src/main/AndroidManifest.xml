@@ -10,10 +10,9 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 		<activity
-			android:name=".ui.detail.DetailActivity"
+			android:name=".ui.detail.DetailsActivity"
 			android:label="@string/title_activity_detail"
-			android:theme="@style/AppTheme.NoActionBar"></activity>
-		<activity android:name=".ui.detail.DetailsActivity" />
+			android:theme="@style/AppTheme.NoActionBar" />
 		<activity android:name=".ui.add.AddActivity" />
 		<activity android:name=".ui.list.MainActivity">
 			<intent-filter>
@@ -25,3 +24,4 @@
 	</application>
 
 </manifest>
+
