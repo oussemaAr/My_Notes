@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.odc.mynotes.R.layout.activity_main
-import com.odc.mynotes.data.db.NoteDB
 import com.odc.mynotes.data.entity.Note
 import com.odc.mynotes.ui.add.AddActivity
 import com.odc.mynotes.ui.detail.DetailsActivity
@@ -21,7 +21,11 @@ class MainActivity : AppCompatActivity() {
 		setContentView(activity_main)
 
 		val listNote = ArrayList<Note>()
-		NoteDB.getDatabase(this).getDao().getAllNotes().observe(this, Observer {
+
+		val viewModel: ListNoteViewModel =
+			ViewModelProvider(this).get(ListNoteViewModel::class.java)
+
+		viewModel.getNotes().observe(this, Observer {
 			listNote.clear()
 			listNote.addAll(it)
 			adapter.notifyDataSetChanged()
