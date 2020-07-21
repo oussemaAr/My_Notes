@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.odc.mynotes.R
 import com.odc.mynotes.data.entity.Note
 
-class NoteAdapter(private val data: ArrayList<Note>, val listener: (Note) -> Unit) :
+class NoteAdapter(private val data: List<Note>, val listener: (Note) -> Unit) :
 	RecyclerView.Adapter<NoteViewHolder>() {
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder =

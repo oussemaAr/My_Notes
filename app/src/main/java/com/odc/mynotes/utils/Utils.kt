@@ -5,4 +5,4 @@ import com.odc.mynotes.data.entity.Note
 
 fun timeAgo(timestamp: Long): String = DateUtils.getRelativeTimeSpanString(timestamp).toString()
 
-var data = ArrayList<Note>()
+//var data = ArrayList<Note>()
